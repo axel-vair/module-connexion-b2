@@ -1,0 +1,39 @@
+{% extends "/base.html.twig" %}
+
+{% block title %} Symrecipe - Accueil
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Bienvenue sur Symrecipe!</h1>
+            <p class="lead">Symrecipe est un site internet qui permet de créer des recettes à l'aide d'ingrédients que tu auras ajoutés toi-même. Tu pourras ensuite partager ces recettes avec la communauté ou bien simplement les garder sur ton espace <privé></privé>.</p>
+            <hr class="my-4">
+            <p>Pour commencer à créer des recettes, rendez-vous sur la page d'inscription.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">S'inscrire</a>
+            </p>
+        </div>
+
+        <div class="recipes">
+            <h2 class="mt-4">Recettes de la communauté</h2>
+            <div class="d-flex justify-content-between">
+                {% for recipe in recipes %}
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header"> <a href="{{ path('recipe.show', {id: recipe.id}) }}">Recette n°{{ recipe.id }}</a></div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                               {{ recipe.name }}
+                            </h4>
+                            <p class="card-text">{{ recipe.description|slice(0, 100) ~ '...' }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+{%  endblock %}
